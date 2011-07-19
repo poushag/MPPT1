@@ -57,9 +57,9 @@ fractional Buck1VoltageHistory[3] __attribute__ ((section (".ybss, bss, ymemory"
 #define PID_BUCK1_B Q15(-1 *(PID_BUCK1_KP + 2 * PID_BUCK1_KD))
 #define PID_BUCK1_C Q15(PID_BUCK1_KD)
 
-#define PID_BUCK1_VOLTAGE_REFERENCE 0x6120				/* Reference voltage 4V = 5D60 (or 6120 to compensate for -4% error)
-														/*                   5V = 74C0 (or 7960 to compensate for -4% error)
-														/*                   3V = ? (48E0 to compensate for -4% error)
+#define PID_BUCK1_VOLTAGE_REFERENCE 0x6120				// Reference voltage 4V = 5D60 (or 6120 to compensate for -4% error)
+														//                   5V = 74C0 (or 7960 to compensate for -4% error)
+														//                   3V = ? (48E0 to compensate for -4% error)
 													    /* Reference voltage is from resistor divider circuit R11 & R12 
 													    	Voltage FB1 = (5kOhm / (5kOhm + 3.3kOhm)) * 5V = 3V
 														    Now calculate expected ADC value (3V * 1024)/3.3V = 931 
