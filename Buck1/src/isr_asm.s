@@ -95,7 +95,9 @@ __ADCP0Interrupt:
     clr.w w0
     bset.b w0, #0
 	add w2, w0, w2					; increment ctr
-	sl w0, #10, w0					    ; set ctr limit
+	sl w0, #10, w0					; set ctr limit, where 35ns is min ADC period (multiplied by ADCS value)
+;	mov PDC1, w0					; set alt ctr limit (but must also divide accum by # of samples counted this instance)
+									; so for ADCS = 6, ~30 samples per switching period are taken
 	cpsgt w0, w2					; compare ctr to limit & if gtr
 	mov.w w1, 0x0856				; update average value for InputCurrentDC			
 	cpsgt w0, w2					; compare ctr to limit & if gtr
