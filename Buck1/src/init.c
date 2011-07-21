@@ -47,6 +47,11 @@ tPID Buck1VoltagePID;
 fractional Buck1VoltageABC[3] __attribute__ ((section (".xbss, bss, xmemory")));
 fractional Buck1VoltageHistory[3] __attribute__ ((section (".ybss, bss, ymemory")));
 
+int InputCurrentDC __attribute__ ((section (".xbss, bss, xmemory")));
+int accum __attribute__ ((section (".xbss, bss, xmemory")));
+int ctr __attribute__ ((section (".xbss, bss, xmemory")));
+
+
 /* Buck1 is the 5V output with Voltage Mode Control implemented */
 #define PID_BUCK1_KP 0.23
 #define PID_BUCK1_KI 0.0016
@@ -112,7 +117,25 @@ void Buck1Drive(void)
 	PDC1 = 72;                            /* Initial pulse-width [ns] = minimum deadtime required (DTR1 + ALDTR1)*/            
  	TRIG1 = 8;                            /* Trigger generated at beginning of PWM active period */
 
+ 	SEVTCMP = 8;                // Special Event Trigger generated at beginning of PWM active period
+	PTCONbits.SEVTPS = 1; 		// Special Event Trigger output postscaler set to 1:1 (trigger generated every PWM cycle
+//	PTCONbits.SEVTPS = 15; 		// Special Event Trigger output postscaler set to 1:16 (trigger generated every 16th PWM cycle
+	PTCONbits.SEIEN = 1; 		// Special Event Trigger interrupt enabled
 
+	ctr = 0;
+
+}
+
+void avg_adc_c0(void)
+{
+	;unsigned short i;
+	int result_temp=0;
+	while(i>0) //looping to get average value, i must be incremented using a slow timer  ;agp
+	{
+/*		result=ADCBUF0;
+		result_temp+=result;
+		result = result_temp/1024; //getting average value will work as long as ADC values are <= 40h = 64d
+*/	}
 }
 
 void CurrentandVoltageMeasurements(void)
@@ -136,12 +159,12 @@ void CurrentandVoltageMeasurements(void)
     ADSTATbits.P0RDY = 0; 				  /* Clear Pair 0 data ready bit */
     ADCPC0bits.IRQEN0 = 1; 				  /* Enable ADC Interrupt for Buck 1 control loop */ 
     ADCPC0bits.TRGSRC0 = 4; 			  /* ADC Pair 0 triggered by PWM1 */
+//    ADCPC0bits.TRGSRC0 = 5; 			  /* ADC Pair 0 triggered by SEVT */
 
 
     ADSTATbits.P2RDY = 0; 				  /* Clear Pair 2 data ready bit */
     ADCPC1bits.IRQEN2 = 0;                /* Disable ADC Interrupt for input voltage measurment */
     ADCPC1bits.TRGSRC2 = 4; 			  /* ADC Pair 2 triggered by PWM1 */
-
     
 }
 
@@ -176,7 +199,7 @@ void Buck1SoftStartRoutine(void)
 
 	while (Buck1VoltagePID.controlReference <= PID_BUCK1_VOLTAGE_REFERENCE)
 	{
-		Delay_ms(64);										/* orig val of 1 agp */
+		Delay_ms(1);										// 64 -> 3 sec soft start ;agp
 		Buck1VoltagePID.controlReference += BUCK1_SOFTSTART_INCREMENT;
 	}
 

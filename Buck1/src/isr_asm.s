@@ -34,6 +34,9 @@
 .equ __33FJ16GS502, 1
 .include "p33FJ16GS502.inc"
 
+; for MPPT control
+;.equ InputCurrentDC, 0
+
 ; Buck 1 Maximum Duty cycle for voltage mode control
 .equ Buck1MaxDC, 2024		; 7E8h	[ns]	; equiv to D~81%	;agp
 
@@ -56,6 +59,7 @@
 __ADCP0Interrupt:
     push w0
     push w1
+    push w2
 
     mov #_Buck1VoltagePID, w0
 
@@ -79,10 +83,32 @@ __ADCP0Interrupt:
 	mov.w w0, PDC1						; Update new Duty Cycle [ns]
     mov.w w0, TRIG1						; Update new trigger value to correspond to new duty cycle
 
+	lsr w0, #1, w0						; divide w0 by two and overwrite w0
+	mov.w w0, SEVTCMP					; update special event trigger counts = 1/2 PDC1	;agp
+
+    mov ADCBUF0, w0
+;    sl  w0, #5, w0						; Since only a 10-bit ADC shift left by 5 leaving the 16-bit 0 for a positive #
+
+    mov 0x0858, w1					; read curr accum
+	add.w w0, w1, w1				; add sensor curr to curr accum
+	mov 0x085A, w2					; read ctr
+    clr.w w0
+    bset.b w0, #0
+	add w2, w0, w2					; increment ctr
+	sl w0, #10, w0					    ; set ctr limit
+	cpsgt w0, w2					; compare ctr to limit & if gtr
+	mov.w w1, 0x0856				; update average value for InputCurrentDC			
+	cpsgt w0, w2					; compare ctr to limit & if gtr
+	clr.w, w1						; reset curr accum
+	mov.w w1, 0x0858				; save curr accum
+	cpsgt w0, w2					; compare ctr to limit & if gtr
+	clr.w, w2						; reset ctr
+	mov.w w2, 0x085A				; save ctr
 
     bclr	ADSTAT,	#0					; Clear Pair 0 conversion status bit
 	bclr 	IFS6, #14					; Clear Pair 0 Interrupt Flag
 
+    pop w2
     pop w1
     pop w0
 	retfie								; Return from interrupt
