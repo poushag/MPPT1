@@ -48,11 +48,11 @@ Program Memory  [Origin = 0x200, Length = 0x29fe]
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200                0xee           0x165  (357)
-.text                        0x2ee               0x1d4           0x2be  (702)
-.dinit                       0x4c2                0x1c            0x2a  (42)
-.text                        0x4de                0x12            0x1b  (27)
+.text                        0x2ee               0x244           0x366  (870)
+.dinit                       0x532                0x1c            0x2a  (42)
+.text                        0x54e                0x12            0x1b  (27)
 
-                     Total program memory used (bytes):          0x468  (1128) 6%
+                     Total program memory used (bytes):          0x510  (1296) 8%
 
 
 Data Memory  [Origin = 0x800, Length = 0x800]
@@ -60,12 +60,12 @@ Data Memory  [Origin = 0x800, Length = 0x800]
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .icd                         0x800                0x50            0x50  (80)
-.xbss                        0x850                   0             0x6  (6)
-.nbss                        0x856                   0             0xa  (10)
-.ndata                       0x860                   0             0x2  (2)
+.xbss                        0x850                   0             0xc  (12)
+.nbss                        0x85c                   0             0xa  (10)
+.ndata                       0x866                   0             0x2  (2)
 .ybss                        0xffa                   0             0x6  (6)
 
-                        Total data memory used (bytes):           0x68  (104) 5%
+                        Total data memory used (bytes):           0x6e  (110) 5%
 
 
 Dynamic Memory Usage
@@ -73,24 +73,30 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x862                               0x798  (1944)
+stack                        0x868                               0x792  (1938)
 
-                        Maximum dynamic memory (bytes):          0x798  (1944)
+                        Maximum dynamic memory (bytes):          0x792  (1938)
 
 
 External Symbols in Data Memory (by address):
 
                     0x0850                  _Buck1VoltageABC
-                    0x0856                  _Buck1VoltagePID
-                    0x0860                  _TimerInterruptCount
+                    0x0856                  _InputCurrentDC
+                    0x0858                  _accum
+                    0x085a                  _ctr
+                    0x085c                  _Buck1VoltagePID
+                    0x0866                  _TimerInterruptCount
                     0x0ffa                  _Buck1VoltageHistory
 
 External Symbols in Data Memory (by name):
 
                     0x0850                  _Buck1VoltageABC
                     0x0ffa                  _Buck1VoltageHistory
-                    0x0856                  _Buck1VoltagePID
-                    0x0860                  _TimerInterruptCount
+                    0x085c                  _Buck1VoltagePID
+                    0x0856                  _InputCurrentDC
+                    0x0866                  _TimerInterruptCount
+                    0x0858                  _accum
+                    0x085a                  _ctr
 
 External Symbols in Program Memory (by address):
 
@@ -102,31 +108,33 @@ External Symbols in Program Memory (by address):
                   0x000294                  _PID
                   0x0002d8                  _PIDInit
                   0x0002ee                  _Buck1Drive
-                  0x000344                  _CurrentandVoltageMeasurements
-                  0x000394                  _Buck1VoltageLoop
-                  0x0003c4                  _Buck1SoftStartRoutine
-                  0x0003e2                  _Delay_ms
-                  0x00040c                  _main
-                  0x000494                  __ADCP0Interrupt
-                  0x0004de                  __T1Interrupt
+                  0x00035a                  _avg_adc_c0
+                  0x00036a                  _CurrentandVoltageMeasurements
+                  0x0003ba                  _Buck1VoltageLoop
+                  0x0003ea                  _Buck1SoftStartRoutine
+                  0x000408                  _Delay_ms
+                  0x000432                  _main
+                  0x0004dc                  __ADCP0Interrupt
+                  0x00054e                  __T1Interrupt
 
 External Symbols in Program Memory (by name):
 
                   0x0002ee                  _Buck1Drive
-                  0x0003c4                  _Buck1SoftStartRoutine
-                  0x000394                  _Buck1VoltageLoop
-                  0x000344                  _CurrentandVoltageMeasurements
-                  0x0003e2                  _Delay_ms
+                  0x0003ea                  _Buck1SoftStartRoutine
+                  0x0003ba                  _Buck1VoltageLoop
+                  0x00036a                  _CurrentandVoltageMeasurements
+                  0x000408                  _Delay_ms
                   0x000294                  _PID
                   0x0002d8                  _PIDInit
-                  0x000494                  __ADCP0Interrupt
+                  0x0004dc                  __ADCP0Interrupt
                   0x000290                  __DefaultInterrupt
-                  0x0004de                  __T1Interrupt
+                  0x00054e                  __T1Interrupt
                   0x000232                  __data_init
                   0x000232                  __data_init_standard
                   0x000222                  __psv_init
                   0x000200                  __resetPRI
-                  0x00040c                  _main
+                  0x00035a                  _avg_adc_c0
+                  0x000432                  _main
 
 Memory Configuration
 
@@ -286,7 +294,7 @@ __FUID1
                   0x000014          0x4 LONG 0x290 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x290 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x290 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x4de DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x54e DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x290 DEFINED (__Interrupt4)?ABSOLUTE (__Interrupt4):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x290 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x290 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -393,7 +401,7 @@ __FUID1
                   0x0000ea          0x4 LONG 0x290 DEFINED (__Interrupt107)?ABSOLUTE (__Interrupt107):ABSOLUTE (__DefaultInterrupt)
                   0x0000ec          0x4 LONG 0x290 DEFINED (__Interrupt108)?ABSOLUTE (__Interrupt108):ABSOLUTE (__DefaultInterrupt)
                   0x0000ee          0x4 LONG 0x290 DEFINED (__Interrupt109)?ABSOLUTE (__Interrupt109):ABSOLUTE (__DefaultInterrupt)
-                  0x0000f0          0x4 LONG 0x494 DEFINED (__ADCP0Interrupt)?ABSOLUTE (__ADCP0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000f0          0x4 LONG 0x4dc DEFINED (__ADCP0Interrupt)?ABSOLUTE (__ADCP0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000f2          0x4 LONG 0x290 DEFINED (__ADCP1Interrupt)?ABSOLUTE (__ADCP1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000f4          0x4 LONG 0x290 DEFINED (__ADCP2Interrupt)?ABSOLUTE (__ADCP2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000f6          0x4 LONG 0x290 DEFINED (__ADCP3Interrupt)?ABSOLUTE (__ADCP3Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -414,7 +422,7 @@ __FUID1
                   0x000114          0x4 LONG 0x290 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000116          0x4 LONG 0x290 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000118          0x4 LONG 0x290 DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00011a          0x4 LONG 0x4de DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00011a          0x4 LONG 0x54e DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011c          0x4 LONG 0x290 DEFINED (__AltInterrupt4)?ABSOLUTE (__AltInterrupt4):DEFINED (__Interrupt4)?ABSOLUTE (__Interrupt4):ABSOLUTE (__DefaultInterrupt)
                   0x00011e          0x4 LONG 0x290 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000120          0x4 LONG 0x290 DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -521,7 +529,7 @@ __FUID1
                   0x0001ea          0x4 LONG 0x290 DEFINED (__AltInterrupt107)?ABSOLUTE (__AltInterrupt107):DEFINED (__Interrupt107)?ABSOLUTE (__Interrupt107):ABSOLUTE (__DefaultInterrupt)
                   0x0001ec          0x4 LONG 0x290 DEFINED (__AltInterrupt108)?ABSOLUTE (__AltInterrupt108):DEFINED (__Interrupt108)?ABSOLUTE (__Interrupt108):ABSOLUTE (__DefaultInterrupt)
                   0x0001ee          0x4 LONG 0x290 DEFINED (__AltInterrupt109)?ABSOLUTE (__AltInterrupt109):DEFINED (__Interrupt109)?ABSOLUTE (__Interrupt109):ABSOLUTE (__DefaultInterrupt)
-                  0x0001f0          0x4 LONG 0x494 DEFINED (__AltADCP0Interrupt)?ABSOLUTE (__AltADCP0Interrupt):DEFINED (__ADCP0Interrupt)?ABSOLUTE (__ADCP0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0001f0          0x4 LONG 0x4dc DEFINED (__AltADCP0Interrupt)?ABSOLUTE (__AltADCP0Interrupt):DEFINED (__ADCP0Interrupt)?ABSOLUTE (__ADCP0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0001f2          0x4 LONG 0x290 DEFINED (__AltADCP1Interrupt)?ABSOLUTE (__AltADCP1Interrupt):DEFINED (__ADCP1Interrupt)?ABSOLUTE (__ADCP1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0001f4          0x4 LONG 0x290 DEFINED (__AltADCP2Interrupt)?ABSOLUTE (__AltADCP2Interrupt):DEFINED (__ADCP2Interrupt)?ABSOLUTE (__ADCP2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0001f6          0x4 LONG 0x290 DEFINED (__AltADCP3Interrupt)?ABSOLUTE (__AltADCP3Interrupt):DEFINED (__ADCP3Interrupt)?ABSOLUTE (__ADCP3Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1230,37 +1238,41 @@ __c30_signature
  __c30_signature
                   0x000018          0x6 c:/program files/microchip/mplabc30/v3.30/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
 
-.xbss               0x0850          0x6
- .xbss              0x0850          0x6 src\init.o
+.xbss               0x0850          0xc
+ .xbss              0x0850          0xc src\init.o
                     0x0850                  Buck1VoltageABC
+                    0x0856                  InputCurrentDC
+                    0x0858                  accum
+                    0x085a                  ctr
 
 .ybss               0x0ffa          0x6
  .ybss              0x0ffa          0x6 src\init.o
                     0x0ffa                  Buck1VoltageHistory
 
-.nbss               0x0856          0xa
- .nbss              0x0856          0xa src\init.o
-                    0x0856                  Buck1VoltagePID
+.nbss               0x085c          0xa
+ .nbss              0x085c          0xa src\init.o
+                    0x085c                  Buck1VoltagePID
 
-.ndata              0x0860          0x2
- .ndata             0x0860          0x2 src\isr.o
-                    0x0860                  TimerInterruptCount
+.ndata              0x0866          0x2
+ .ndata             0x0866          0x2 src\isr.o
+                    0x0866                  TimerInterruptCount
 
-.text             0x0002ee        0x1d4
- .text            0x0002ee        0x11e src\init.o
+.text             0x0002ee        0x244
+ .text            0x0002ee        0x144 src\init.o
                   0x0002ee                  Buck1Drive
-                  0x000344                  CurrentandVoltageMeasurements
-                  0x000394                  Buck1VoltageLoop
-                  0x0003c4                  Buck1SoftStartRoutine
-                  0x0003e2                  Delay_ms
- .text            0x00040c         0x88 src\main.o
-                  0x00040c                  main
- .text            0x000494         0x2e src\isr_asm.o
-                  0x000494                  _ADCP0Interrupt
+                  0x00035a                  avg_adc_c0
+                  0x00036a                  CurrentandVoltageMeasurements
+                  0x0003ba                  Buck1VoltageLoop
+                  0x0003ea                  Buck1SoftStartRoutine
+                  0x000408                  Delay_ms
+ .text            0x000432         0xaa src\main.o
+                  0x000432                  main
+ .text            0x0004dc         0x56 src\isr_asm.o
+                  0x0004dc                  _ADCP0Interrupt
 
-.dinit            0x0004c2         0x1c
- .dinit           0x0004c2         0x1c data_init
+.dinit            0x000532         0x1c
+ .dinit           0x000532         0x1c data_init
 
-.text             0x0004de         0x12
- .text            0x0004de         0x12 src\isr.o
-                  0x0004de                  _T1Interrupt
+.text             0x00054e         0x12
+ .text            0x00054e         0x12 src\isr.o
+                  0x00054e                  _T1Interrupt

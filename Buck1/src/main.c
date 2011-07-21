@@ -37,7 +37,7 @@
 _FOSCSEL(FNOSC_FRC)
 _FOSC(FCKSM_CSECMD & OSCIOFNC_ON)
 _FWDT(FWDTEN_OFF)
-_FPOR(FPWRT_PWR128)/* & BOREN_OFF)*/
+_FPOR(FPWRT_PWR128)// & BOREN_OFF)
 _FICD(ICS_PGD2 & JTAGEN_OFF)
 
 #define INPUTUNDERVOLTAGE 391					/* Input voltage <7V --> 2.2k/(10k+2.2k)*7V = 1.2623V
@@ -49,6 +49,7 @@ int main(void)
 {
 
 	int InputVoltage;
+	int InputCurrent;
 
 	/* Configure Oscillator to operate the device at 40Mhz
 	   Fosc= Fin*M/(N1*N2), Fcy=Fosc/2
@@ -97,6 +98,17 @@ int main(void)
 					{
 						InputVoltage = ADCBUF4;						/* Read input Voltage */
 						ADSTATbits.P2RDY = 0;						/* Clear the ADC pair ready bit */
+						
+					}
+	
+	
+					if (PTCONbits.SESTAT ==1)	// ;agp
+			
+					{
+						InputCurrent = ADCBUF0;						// Read output Current
+						InputCurrent *= PDC1;						// mult output Current by on-time
+						InputCurrent /= PTPER;						// div prev result by period
+//						LATBbits.LATB12 = LATBbits.LATB12;						// cant Clear the status bit
 						
 					}
 	
