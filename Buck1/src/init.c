@@ -47,9 +47,10 @@ tPID Buck1VoltagePID;
 fractional Buck1VoltageABC[3] __attribute__ ((section (".xbss, bss, xmemory")));
 fractional Buck1VoltageHistory[3] __attribute__ ((section (".ybss, bss, ymemory")));
 
-int InputCurrentDC __attribute__ ((section (".xbss, bss, xmemory")));
-int accum __attribute__ ((section (".xbss, bss, xmemory")));
 int ctr __attribute__ ((section (".xbss, bss, xmemory")));
+int accum __attribute__ ((section (".xbss, bss, xmemory")));
+int tempx __attribute__ ((section (".xbss, bss, xmemory")));
+long int InputCurrentDC __attribute__ ((section (".xbss, bss, xmemory")));
 
 
 /* Buck1 is the 5V output with Voltage Mode Control implemented */
@@ -129,7 +130,7 @@ void Buck1Drive(void)
 void avg_adc_c0(void)
 {
 	;unsigned short i;
-	int result_temp=0;
+//	int result_temp=0;
 	while(i>0) //looping to get average value, i must be incremented using a slow timer  ;agp
 	{
 /*		result=ADCBUF0;
