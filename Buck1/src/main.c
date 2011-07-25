@@ -40,10 +40,10 @@ _FWDT(FWDTEN_OFF)
 _FPOR(FPWRT_PWR128)// & BOREN_OFF)
 _FICD(ICS_PGD2 & JTAGEN_OFF)
 
-#define INPUTUNDERVOLTAGE 391					/* Input voltage <7V --> 2.2k/(10k+2.2k)*7V = 1.2623V
-												Now calculate the ADC expected value = 1.2623/3.3*1023 = 391 */
-#define INPUTOVERVOLTAGE 839						/* Input voltage >15V --> 2.2k/ (10k+2.2k)*15 = 2.70492V
-												Now calculate the ADC expected value  = 2.70492/3.3*1023 = 839 */
+#define INPUTUNDERVOLTAGE 350  // 391 (reduced from 7 to Vo/.8)	 Input voltage <7V --> 2.2k/(10k+2.2k)*7V = 1.2623V
+												// Now calculate the ADC expected value = 1.2623/3.3*1023 = 391
+#define INPUTOVERVOLTAGE 850  // 839						 Input voltage >15V --> 2.2k/ (10k+2.2k)*15 = 2.70492V
+												// Now calculate the ADC expected value  = 2.70492/3.3*1023 = 839
 
 int main(void)
 {

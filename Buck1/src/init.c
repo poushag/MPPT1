@@ -49,8 +49,8 @@ fractional Buck1VoltageHistory[3] __attribute__ ((section (".ybss, bss, ymemory"
 
 int ctr __attribute__ ((section (".xbss, bss, xmemory")));
 int accum __attribute__ ((section (".xbss, bss, xmemory")));
-int tempx __attribute__ ((section (".xbss, bss, xmemory")));
-long int InputCurrentDC __attribute__ ((section (".xbss, bss, xmemory")));
+//int tempx __attribute__ ((section (".xbss, bss, xmemory")));
+int Ii_DC __attribute__ ((section (".xbss, bss, xmemory")));
 
 
 /* Buck1 is the 5V output with Voltage Mode Control implemented */
@@ -63,9 +63,11 @@ long int InputCurrentDC __attribute__ ((section (".xbss, bss, xmemory")));
 #define PID_BUCK1_B Q15(-1 *(PID_BUCK1_KP + 2 * PID_BUCK1_KD))
 #define PID_BUCK1_C Q15(PID_BUCK1_KD)
 
-#define PID_BUCK1_VOLTAGE_REFERENCE 0x6120				// Reference voltage 4V = 5D60 (or 6120 to compensate for -4% error)
+#define PID_BUCK1_VOLTAGE_REFERENCE 0x6D40				// Reference voltage 4V = 5D60 (or 6120 to compensate for -4% error)
 														//                   5V = 74C0 (or 7960 to compensate for -4% error)
 														//                   3V = ? (48E0 to compensate for -4% error)
+														//                   4.8V = ? (7480 to compensate for -4% error)
+														//                   4.5V = ? (6D40 to compensate for -4% error)
 													    /* Reference voltage is from resistor divider circuit R11 & R12 
 													    	Voltage FB1 = (5kOhm / (5kOhm + 3.3kOhm)) * 5V = 3V
 														    Now calculate expected ADC value (3V * 1024)/3.3V = 931 

@@ -93,19 +93,22 @@ __ADCP0Interrupt:
     clr.w w0
     bset.b w0, #0
 	add w2, w0, w2					; increment ctr
-	sl w0, #10, w0					; set ctr limit, where 35ns is min ADC period (multiplied by ADCS value)
+	sl w0, #8, w0					; set ctr limit, where 35ns is min ADC period (multiplied by ADCS value)
 ;	mov PDC1, w0					; set alt ctr limit (but must also divide accum by # of samples counted this instance)
 									; so for ADCS = 6, ~30 samples per switching period are taken
 	cpsgt w0, w2					; compare ctr to limit & if gtr
 	mpy w4*w5, A				; mult on-time by output curr to get InputCurrentDC			
+;	cpsgt w0, w2					; compare ctr to limit & if gtr
+;	mov ACCAH, w4				; update average value for InputCurrentDC			
+;	cpsgt w0, w2					; compare ctr to limit & if gtr
+;	mov w4, 0x085E				; update average value for InputCurrentDC			
+;	cpsgt w0, w2					; compare ctr to limit & if gtr
+;	mov ACCAL, w5				; update average value for InputCurrentDC			
 	cpsgt w0, w2					; compare ctr to limit & if gtr
-	mov ACCAH, w4				; update average value for OutputCurrentDC			
+	sac.r A, #0, w3				; scale down InputCurrDC			
 	cpsgt w0, w2					; compare ctr to limit & if gtr
-	mov w4, 0x085E				; update average value for OutputCurrentDC			
-	cpsgt w0, w2					; compare ctr to limit & if gtr
-	mov ACCAL, w5				; update average value for OutputCurrentDC			
-	cpsgt w0, w2					; compare ctr to limit & if gtr
-	mov w5, 0x085C				; update average value for OutputCurrentDC			
+;	mov w5, 0x085C				; update average value for InputCurrentDC			
+	mov w3, 0x085A				; update average value for InputCurrentDC			
 	cpsgt w0, w2					; compare ctr to limit & if gtr
 	clr.w, w5						; reset curr accum
 	mov.w w5, 0x0858				; save curr accum
