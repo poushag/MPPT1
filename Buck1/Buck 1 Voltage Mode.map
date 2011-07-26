@@ -47,12 +47,12 @@ Program Memory  [Origin = 0x200, Length = 0x29fe]
 
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
-.text                        0x200                0xee           0x165  (357)
-.text                        0x2ee               0x24c           0x372  (882)
-.dinit                       0x53a                0x1c            0x2a  (42)
-.text                        0x556                0x12            0x1b  (27)
+.text                        0x200                0xf2           0x16b  (363)
+.text                        0x2f2               0x2a6           0x3f9  (1017)
+.dinit                       0x598                0x1c            0x2a  (42)
+.text                        0x5b4                0x12            0x1b  (27)
 
-                     Total program memory used (bytes):          0x51c  (1308) 8%
+                     Total program memory used (bytes):          0x5a9  (1449) 8%
 
 
 Data Memory  [Origin = 0x800, Length = 0x800]
@@ -60,12 +60,12 @@ Data Memory  [Origin = 0x800, Length = 0x800]
 section                    address      alignment gaps    total length  (dec)
 -------                    -------      --------------    -------------------
 .icd                         0x800                0x50            0x50  (80)
-.xbss                        0x850                   0             0xc  (12)
-.nbss                        0x85c                   0             0xa  (10)
-.ndata                       0x866                   0             0x2  (2)
+.xbss                        0x850                   0            0x10  (16)
+.nbss                        0x860                   0            0x14  (20)
+.ndata                       0x874                   0             0x2  (2)
 .ybss                        0xffa                   0             0x6  (6)
 
-                        Total data memory used (bytes):           0x6e  (110) 5%
+                        Total data memory used (bytes):           0x7c  (124) 6%
 
 
 Dynamic Memory Usage
@@ -73,9 +73,9 @@ Dynamic Memory Usage
 region                     address                      maximum length  (dec)
 ------                     -------                      ---------------------
 heap                             0                                   0  (0)
-stack                        0x868                               0x792  (1938)
+stack                        0x876                               0x784  (1924)
 
-                        Maximum dynamic memory (bytes):          0x792  (1938)
+                        Maximum dynamic memory (bytes):          0x784  (1924)
 
 
 External Symbols in Data Memory (by address):
@@ -84,57 +84,71 @@ External Symbols in Data Memory (by address):
                     0x0856                  _ctr
                     0x0858                  _accum
                     0x085a                  _Ii_DC
-                    0x085c                  _Buck1VoltagePID
-                    0x0866                  _TimerInterruptCount
+                    0x085c                  _Mma
+                    0x085e                  _Mma_buff
+                    0x0860                  _Buck1VoltagePID
+                    0x086a                  _Pi
+                    0x086c                  _Pi_prev
+                    0x086e                  _MPPT_delay
+                    0x0870                  _MPPT_bump_ctr
+                    0x0872                  _temp
+                    0x0874                  _TimerInterruptCount
                     0x0ffa                  _Buck1VoltageHistory
 
 External Symbols in Data Memory (by name):
 
                     0x0850                  _Buck1VoltageABC
                     0x0ffa                  _Buck1VoltageHistory
-                    0x085c                  _Buck1VoltagePID
+                    0x0860                  _Buck1VoltagePID
                     0x085a                  _Ii_DC
-                    0x0866                  _TimerInterruptCount
+                    0x0870                  _MPPT_bump_ctr
+                    0x086e                  _MPPT_delay
+                    0x085c                  _Mma
+                    0x085e                  _Mma_buff
+                    0x086a                  _Pi
+                    0x086c                  _Pi_prev
+                    0x0874                  _TimerInterruptCount
                     0x0858                  _accum
                     0x0856                  _ctr
+                    0x0872                  _temp
 
 External Symbols in Program Memory (by address):
 
                   0x000200                  __resetPRI
                   0x000222                  __psv_init
-                  0x000232                  __data_init_standard
                   0x000232                  __data_init
+                  0x000232                  __data_init_standard
                   0x000290                  __DefaultInterrupt
                   0x000294                  _PID
-                  0x0002d8                  _PIDInit
-                  0x0002ee                  _Buck1Drive
-                  0x00035a                  _avg_adc_c0
-                  0x000364                  _CurrentandVoltageMeasurements
-                  0x0003b4                  _Buck1VoltageLoop
-                  0x0003e4                  _Buck1SoftStartRoutine
-                  0x000402                  _Delay_ms
-                  0x00042c                  _main
-                  0x0004d6                  __ADCP0Interrupt
-                  0x000556                  __T1Interrupt
+                  0x0002dc                  _PIDInit
+                  0x0002f2                  _Buck1Drive
+                  0x000360                  _CurrentandVoltageMeasurements
+                  0x0003b0                  _Buck1VoltageLoop
+                  0x0003e0                  _Buck1SoftStartRoutine
+                  0x0003fe                  _Buck1MPPT
+                  0x00047e                  _Delay_ms
+                  0x0004a8                  _main
+                  0x000534                  __ADCP0Interrupt
+                  0x0005b4                  __T1Interrupt
 
 External Symbols in Program Memory (by name):
 
-                  0x0002ee                  _Buck1Drive
-                  0x0003e4                  _Buck1SoftStartRoutine
-                  0x0003b4                  _Buck1VoltageLoop
-                  0x000364                  _CurrentandVoltageMeasurements
-                  0x000402                  _Delay_ms
+                  0x0002f2                  _Buck1Drive
+                  0x0003fe                  _Buck1MPPT
+                  0x0003e0                  _Buck1SoftStartRoutine
+                  0x0003b0                  _Buck1VoltageLoop
+                  0x000360                  _CurrentandVoltageMeasurements
+                  0x00047e                  _Delay_ms
                   0x000294                  _PID
-                  0x0002d8                  _PIDInit
-                  0x0004d6                  __ADCP0Interrupt
+                  0x0002dc                  _PIDInit
+                  0x000534                  __ADCP0Interrupt
                   0x000290                  __DefaultInterrupt
-                  0x000556                  __T1Interrupt
+                  0x0005b4                  __T1Interrupt
                   0x000232                  __data_init
                   0x000232                  __data_init_standard
                   0x000222                  __psv_init
                   0x000200                  __resetPRI
-                  0x00035a                  _avg_adc_c0
-                  0x00042c                  _main
+                  0x0004a8                  _main
 
 Memory Configuration
 
@@ -187,7 +201,7 @@ LOAD c:/program files/microchip/mplabc30/v3.30/bin/bin/../../lib/dsPIC33F\libp33
                   0x000002          0x2 SHORT 0x0 ((ABSOLUTE (__reset) >> 0x10) & 0x7f)
                   0x000003          0x2 SHORT 0x0
 
-.text             0x000200         0xee
+.text             0x000200         0xf2
  *(.init)
  .init            0x000200         0x32 c:/program files/microchip/mplabc30/v3.30/bin/bin/../../lib\libpic30-coff.a(crt0_standard.o)
                   0x000200                  _resetPRI
@@ -204,9 +218,9 @@ LOAD c:/program files/microchip/mplabc30/v3.30/bin/bin/../../lib/dsPIC33F\libp33
  *(.libc)
  *(.libm)
  *(.libdsp)
- .libdsp          0x000294         0x5a src\pid.o
+ .libdsp          0x000294         0x5e src\pid.o
                   0x000294                  PID
-                  0x0002d8                  PIDInit
+                  0x0002dc                  PIDInit
  *(.lib*)
 
 usercode
@@ -294,7 +308,7 @@ __FUID1
                   0x000014          0x4 LONG 0x290 DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000016          0x4 LONG 0x290 DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000018          0x4 LONG 0x290 DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00001a          0x4 LONG 0x556 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00001a          0x4 LONG 0x5b4 DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00001c          0x4 LONG 0x290 DEFINED (__Interrupt4)?ABSOLUTE (__Interrupt4):ABSOLUTE (__DefaultInterrupt)
                   0x00001e          0x4 LONG 0x290 DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000020          0x4 LONG 0x290 DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -401,7 +415,7 @@ __FUID1
                   0x0000ea          0x4 LONG 0x290 DEFINED (__Interrupt107)?ABSOLUTE (__Interrupt107):ABSOLUTE (__DefaultInterrupt)
                   0x0000ec          0x4 LONG 0x290 DEFINED (__Interrupt108)?ABSOLUTE (__Interrupt108):ABSOLUTE (__DefaultInterrupt)
                   0x0000ee          0x4 LONG 0x290 DEFINED (__Interrupt109)?ABSOLUTE (__Interrupt109):ABSOLUTE (__DefaultInterrupt)
-                  0x0000f0          0x4 LONG 0x4d6 DEFINED (__ADCP0Interrupt)?ABSOLUTE (__ADCP0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0000f0          0x4 LONG 0x534 DEFINED (__ADCP0Interrupt)?ABSOLUTE (__ADCP0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000f2          0x4 LONG 0x290 DEFINED (__ADCP1Interrupt)?ABSOLUTE (__ADCP1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000f4          0x4 LONG 0x290 DEFINED (__ADCP2Interrupt)?ABSOLUTE (__ADCP2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0000f6          0x4 LONG 0x290 DEFINED (__ADCP3Interrupt)?ABSOLUTE (__ADCP3Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -422,7 +436,7 @@ __FUID1
                   0x000114          0x4 LONG 0x290 DEFINED (__AltINT0Interrupt)?ABSOLUTE (__AltINT0Interrupt):DEFINED (__INT0Interrupt)?ABSOLUTE (__INT0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000116          0x4 LONG 0x290 DEFINED (__AltIC1Interrupt)?ABSOLUTE (__AltIC1Interrupt):DEFINED (__IC1Interrupt)?ABSOLUTE (__IC1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000118          0x4 LONG 0x290 DEFINED (__AltOC1Interrupt)?ABSOLUTE (__AltOC1Interrupt):DEFINED (__OC1Interrupt)?ABSOLUTE (__OC1Interrupt):ABSOLUTE (__DefaultInterrupt)
-                  0x00011a          0x4 LONG 0x556 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x00011a          0x4 LONG 0x5b4 DEFINED (__AltT1Interrupt)?ABSOLUTE (__AltT1Interrupt):DEFINED (__T1Interrupt)?ABSOLUTE (__T1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x00011c          0x4 LONG 0x290 DEFINED (__AltInterrupt4)?ABSOLUTE (__AltInterrupt4):DEFINED (__Interrupt4)?ABSOLUTE (__Interrupt4):ABSOLUTE (__DefaultInterrupt)
                   0x00011e          0x4 LONG 0x290 DEFINED (__AltIC2Interrupt)?ABSOLUTE (__AltIC2Interrupt):DEFINED (__IC2Interrupt)?ABSOLUTE (__IC2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x000120          0x4 LONG 0x290 DEFINED (__AltOC2Interrupt)?ABSOLUTE (__AltOC2Interrupt):DEFINED (__OC2Interrupt)?ABSOLUTE (__OC2Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -529,7 +543,7 @@ __FUID1
                   0x0001ea          0x4 LONG 0x290 DEFINED (__AltInterrupt107)?ABSOLUTE (__AltInterrupt107):DEFINED (__Interrupt107)?ABSOLUTE (__Interrupt107):ABSOLUTE (__DefaultInterrupt)
                   0x0001ec          0x4 LONG 0x290 DEFINED (__AltInterrupt108)?ABSOLUTE (__AltInterrupt108):DEFINED (__Interrupt108)?ABSOLUTE (__Interrupt108):ABSOLUTE (__DefaultInterrupt)
                   0x0001ee          0x4 LONG 0x290 DEFINED (__AltInterrupt109)?ABSOLUTE (__AltInterrupt109):DEFINED (__Interrupt109)?ABSOLUTE (__Interrupt109):ABSOLUTE (__DefaultInterrupt)
-                  0x0001f0          0x4 LONG 0x4d6 DEFINED (__AltADCP0Interrupt)?ABSOLUTE (__AltADCP0Interrupt):DEFINED (__ADCP0Interrupt)?ABSOLUTE (__ADCP0Interrupt):ABSOLUTE (__DefaultInterrupt)
+                  0x0001f0          0x4 LONG 0x534 DEFINED (__AltADCP0Interrupt)?ABSOLUTE (__AltADCP0Interrupt):DEFINED (__ADCP0Interrupt)?ABSOLUTE (__ADCP0Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0001f2          0x4 LONG 0x290 DEFINED (__AltADCP1Interrupt)?ABSOLUTE (__AltADCP1Interrupt):DEFINED (__ADCP1Interrupt)?ABSOLUTE (__ADCP1Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0001f4          0x4 LONG 0x290 DEFINED (__AltADCP2Interrupt)?ABSOLUTE (__AltADCP2Interrupt):DEFINED (__ADCP2Interrupt)?ABSOLUTE (__ADCP2Interrupt):ABSOLUTE (__DefaultInterrupt)
                   0x0001f6          0x4 LONG 0x290 DEFINED (__AltADCP3Interrupt)?ABSOLUTE (__AltADCP3Interrupt):DEFINED (__ADCP3Interrupt)?ABSOLUTE (__ADCP3Interrupt):ABSOLUTE (__DefaultInterrupt)
@@ -1238,41 +1252,48 @@ __c30_signature
  __c30_signature
                   0x000018          0x6 c:/program files/microchip/mplabc30/v3.30/bin/bin/../../lib\libpic30-coff.a(data_init_standard.o)
 
-.xbss               0x0850          0xc
- .xbss              0x0850          0xc src\init.o
+.xbss               0x0850         0x10
+ .xbss              0x0850         0x10 src\init.o
                     0x0850                  Buck1VoltageABC
                     0x0856                  ctr
                     0x0858                  accum
                     0x085a                  Ii_DC
+                    0x085c                  Mma
+                    0x085e                  Mma_buff
 
 .ybss               0x0ffa          0x6
  .ybss              0x0ffa          0x6 src\init.o
                     0x0ffa                  Buck1VoltageHistory
 
-.nbss               0x085c          0xa
- .nbss              0x085c          0xa src\init.o
-                    0x085c                  Buck1VoltagePID
+.nbss               0x0860         0x14
+ .nbss              0x0860         0x14 src\init.o
+                    0x0860                  Buck1VoltagePID
+                    0x086a                  Pi
+                    0x086c                  Pi_prev
+                    0x086e                  MPPT_delay
+                    0x0870                  MPPT_bump_ctr
+                    0x0872                  temp
 
-.ndata              0x0866          0x2
- .ndata             0x0866          0x2 src\isr.o
-                    0x0866                  TimerInterruptCount
+.ndata              0x0874          0x2
+ .ndata             0x0874          0x2 src\isr.o
+                    0x0874                  TimerInterruptCount
 
-.text             0x0002ee        0x24c
- .text            0x0002ee        0x13e src\init.o
-                  0x0002ee                  Buck1Drive
-                  0x00035a                  avg_adc_c0
-                  0x000364                  CurrentandVoltageMeasurements
-                  0x0003b4                  Buck1VoltageLoop
-                  0x0003e4                  Buck1SoftStartRoutine
-                  0x000402                  Delay_ms
- .text            0x00042c         0xaa src\main.o
-                  0x00042c                  main
- .text            0x0004d6         0x64 src\isr_asm.o
-                  0x0004d6                  _ADCP0Interrupt
+.text             0x0002f2        0x2a6
+ .text            0x0002f2        0x1b6 src\init.o
+                  0x0002f2                  Buck1Drive
+                  0x000360                  CurrentandVoltageMeasurements
+                  0x0003b0                  Buck1VoltageLoop
+                  0x0003e0                  Buck1SoftStartRoutine
+                  0x0003fe                  Buck1MPPT
+                  0x00047e                  Delay_ms
+ .text            0x0004a8         0x8c src\main.o
+                  0x0004a8                  main
+ .text            0x000534         0x64 src\isr_asm.o
+                  0x000534                  _ADCP0Interrupt
 
-.dinit            0x00053a         0x1c
- .dinit           0x00053a         0x1c data_init
+.dinit            0x000598         0x1c
+ .dinit           0x000598         0x1c data_init
 
-.text             0x000556         0x12
- .text            0x000556         0x12 src\isr.o
-                  0x000556                  _T1Interrupt
+.text             0x0005b4         0x12
+ .text            0x0005b4         0x12 src\isr.o
+                  0x0005b4                  _T1Interrupt

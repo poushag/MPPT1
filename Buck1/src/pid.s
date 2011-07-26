@@ -137,6 +137,10 @@ _PID:
         mov [w0 + #offsetcontrolReference], w3
 
         ; Calculate most recent error with saturation, no limit checking required
+
+		mov		0x085e, w4				; get Mma
+		add		w3, w4, w3				; bump D		;agp
+
         lac     w3, a                   ; A = tPID.controlReference
         lac     w2, b                   ; B = tPID.MeasuredOutput
         sub     a                       ; A = tPID.controlReference - tPID.measuredOutput

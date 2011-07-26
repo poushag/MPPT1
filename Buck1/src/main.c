@@ -33,6 +33,8 @@
 
 #include "p33FJ16GS502.h"
 #include "Functions.h"
+//#include "init.c"
+//tPID Buck1VoltagePID; 
 
 _FOSCSEL(FNOSC_FRC)
 _FOSC(FCKSM_CSECMD & OSCIOFNC_ON)
@@ -45,15 +47,15 @@ _FICD(ICS_PGD2 & JTAGEN_OFF)
 #define INPUTOVERVOLTAGE 850  // 839						 Input voltage >15V --> 2.2k/ (10k+2.2k)*15 = 2.70492V
 												// Now calculate the ADC expected value  = 2.70492/3.3*1023 = 839
 
+
 int main(void)
 {
 
-	int InputVoltage;
-	int InputCurrent;
+	int Vi;
 
 	/* Configure Oscillator to operate the device at 40Mhz
-	   Fosc= Fin*M/(N1*N2), Fcy=Fosc/2
- 	   Fosc= 7.37*(43)/(2*2)=80Mhz for Fosc, Fcy = 40Mhz */
+	   Fosc= Fin/N1*M/N2, Fcy=Fosc/2
+ 	   Fosc= 7.37/2*(43)/2=80Mhz for Fosc, Fcy = 40Mhz */
 
 	/* Configure PLL prescaler, PLL postscaler, PLL divisor */
 	PLLFBD = 41; 							/* M = PLLFBD + 2 */
@@ -66,8 +68,8 @@ int main(void)
 	while(OSCCONbits.COSC != 0b001);		/* Wait for Oscillator to switch to FRC w/ PLL */  
     while(OSCCONbits.LOCK != 1);			/* Wait for Pll to Lock */
 
-	/* Now setup the ADC and PWM clock for 120MHz (& after hardcoded 16x multiplier applied, 1.04ns res is achieved)	;agp
-	   ((FRC * 16) / APSTSCLR ) = (7.37MHz * 16) / 1 = 117.9MHz*/
+	/* Setup aux clock for ADC & PWM @ 120MHz (& after hardcoded 8x multiplier applied, 1.06ns res is achieved)	;agp
+	   ((FRC * 16) / APSTSCLR ) = (7.37MHz * 16) / 1 = 117.9MHz */
 	
 	ACLKCONbits.FRCSEL = 1;					/* FRC provides input for Auxiliary PLL (x16) */
 	ACLKCONbits.SELACLK = 1;				/* Auxiliary Ocillator provides clock source for PWM & ADC */
@@ -96,24 +98,12 @@ int main(void)
 					if (ADSTATbits.P2RDY ==1)
 			
 					{
-						InputVoltage = ADCBUF4;						/* Read input Voltage */
-						ADSTATbits.P2RDY = 0;						/* Clear the ADC pair ready bit */
-						
+						Vi = ADCBUF4;						/* Read input Voltage */
+						ADSTATbits.P2RDY = 0;				/* Clear the ADC pair ready bit */
 					}
 	
 	
-					if (PTCONbits.SESTAT ==1)	// ;agp
-			
-					{
-						InputCurrent = ADCBUF0;						// Read output Current
-						InputCurrent *= PDC1;						// mult output Current by on-time
-						InputCurrent /= PTPER;						// div prev result by period
-//						LATBbits.LATB12 = LATBbits.LATB12;						// cant Clear the status bit
-						
-					}
-	
-	
-					if ((InputVoltage <= INPUTUNDERVOLTAGE) || (InputVoltage >= INPUTOVERVOLTAGE)) /* if input voltage is less than 
+					if ((Vi <= INPUTUNDERVOLTAGE) || (Vi >= INPUTOVERVOLTAGE)) /* if input voltage is less than 
 																				    				underVoltage or greater than over 
 																									voltage limit shuts down all PWM output */
 
@@ -122,6 +112,12 @@ int main(void)
 						IOCON1bits.OVRENL = 1;							/* Over ride the PWM1L to inactive state */ 
 					}
 
+					else	// ;agp
+			
+					{
+						Buck1MPPT();
+					}
+	
 			}
 
 }

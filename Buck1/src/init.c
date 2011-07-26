@@ -47,11 +47,19 @@ tPID Buck1VoltagePID;
 fractional Buck1VoltageABC[3] __attribute__ ((section (".xbss, bss, xmemory")));
 fractional Buck1VoltageHistory[3] __attribute__ ((section (".ybss, bss, ymemory")));
 
+// input current averaging defns
 int ctr __attribute__ ((section (".xbss, bss, xmemory")));
 int accum __attribute__ ((section (".xbss, bss, xmemory")));
-//int tempx __attribute__ ((section (".xbss, bss, xmemory")));
 int Ii_DC __attribute__ ((section (".xbss, bss, xmemory")));
 
+// mppt defns
+int Mma __attribute__ ((section (".xbss, bss, xmemory")));
+int Mma_buff __attribute__ ((section (".xbss, bss, xmemory")));
+int Pi;
+int Pi_prev;
+int MPPT_delay;
+int MPPT_bump_ctr;
+int temp;
 
 /* Buck1 is the 5V output with Voltage Mode Control implemented */
 #define PID_BUCK1_KP 0.23
@@ -76,7 +84,7 @@ int Ii_DC __attribute__ ((section (".xbss, bss, xmemory")));
 #define PID_BUCK1_VOLTAGE_MIN 	  	  2304				 /* Minimum duty cycle is total dead time (72) left shifted by 5 bits*/
 
 /* This is increment rate to give us desired PID_BUCK1VOLTAGE_REFERENCE. The sofstart takes 50ms */
- #define BUCK1_SOFTSTART_INCREMENT	 ((PID_BUCK1_VOLTAGE_REFERENCE - PID_BUCK1_VOLTAGE_MIN) / 50 ) 
+#define BUCK1_SOFTSTART_INCREMENT	 ((PID_BUCK1_VOLTAGE_REFERENCE - PID_BUCK1_VOLTAGE_MIN) / 50 ) 
 
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -86,8 +94,8 @@ void Buck1Drive(void)
 {
     /* Buck1 converter setup to output 5V */
     
-    PTPER = 2404;                         /* PTPER = ((1 / 400kHz) / 1.04ns) = 2404, where 400kHz 
-											 is the desired switching frequency and 1.04ns is PWM resolution. */
+    PTPER = 2350;                         /* PTPER = [ ( 117.9MHz * 8 / fs ) - 8 ] = ( ACLK cycle count - pulse rise dead-time )
+											where fs = 400kHz is desired switching frequency & PTPER is PWM Time Period. */
 
     IOCON1bits.PENH = 1;                  /* PWM1H is controlled by PWM module */
     IOCON1bits.PENL = 1;                  /* PWM1L is controlled by PWM module */
@@ -104,9 +112,9 @@ void Buck1Drive(void)
 
     PWMCON1bits.DTC = 0;                  /* Positive Deadtime enabled */
     
-    DTR1    = 0x18;                  	  /* DTR = (25ns / 1.04ns), where desired dead time is 25ns. 
+    DTR1    = 0x18;                  	  /* DTR = (25ns / 1.06ns), where desired dead time is 25ns. 
 										     Mask upper two bits since DTR<13:0> */
-    ALTDTR1 = 0x30;               		  /* ALTDTR = (50ns / 1.04ns), where desired dead time is 50ns. 
+    ALTDTR1 = 0x30;               		  /* ALTDTR = (50ns / 1.06ns), where desired dead time is 50ns. 
 										     Mask upper two bits since ALTDTR<13:0> */
     
     PWMCON1bits.IUE = 0;                  /* Disable Immediate duty cycle updates */
@@ -120,25 +128,18 @@ void Buck1Drive(void)
 	PDC1 = 72;                            /* Initial pulse-width [ns] = minimum deadtime required (DTR1 + ALDTR1)*/            
  	TRIG1 = 8;                            /* Trigger generated at beginning of PWM active period */
 
- 	SEVTCMP = 8;                // Special Event Trigger generated at beginning of PWM active period
-	PTCONbits.SEVTPS = 1; 		// Special Event Trigger output postscaler set to 1:1 (trigger generated every PWM cycle
+// 	SEVTCMP = 8;                // Special Event Trigger generated at beginning of PWM active period
+//	PTCONbits.SEVTPS = 1; 		// Special Event Trigger output postscaler set to 1:1 (trigger generated every PWM cycle
 //	PTCONbits.SEVTPS = 15; 		// Special Event Trigger output postscaler set to 1:16 (trigger generated every 16th PWM cycle
-	PTCONbits.SEIEN = 1; 		// Special Event Trigger interrupt enabled
+//	PTCONbits.SEIEN = 1; 		// Special Event Trigger interrupt enabled
 
 	ctr = 0;
+	Ii_DC = 0;
+	Mma_buff = 10;		// [ns] ~10x duty res
+	Pi_prev = 0;
+	MPPT_delay = 1;
+	MPPT_bump_ctr = 0; 
 
-}
-
-void avg_adc_c0(void)
-{
-	;unsigned short i;
-//	int result_temp=0;
-	while(i>0) //looping to get average value, i must be incremented using a slow timer  ;agp
-	{
-/*		result=ADCBUF0;
-		result_temp+=result;
-		result = result_temp/1024; //getting average value will work as long as ADC values are <= 40h = 64d
-*/	}
 }
 
 void CurrentandVoltageMeasurements(void)
@@ -210,6 +211,40 @@ void Buck1SoftStartRoutine(void)
 }
 
 
+void Buck1MPPT (void)
+{
+	Delay_ms(MPPT_delay);
+	temp = Buck1VoltagePID.controlReference - Buck1VoltagePID.measuredOutput;		// calc Vx	
+	if ((temp > -10) || (temp < 10))												// check against error limit
+	{
+		Mma = Mma_buff;
+		temp = Buck1VoltagePID.controlReference + Mma;		
+		if ((temp >= 0x48E0) || (temp <= 0x7960))									// clamp Vo
+		{
+			asm("mov 0x0864, w4");
+			asm("mov 0x085A, w5");
+			asm("mpy w4*w5, A");
+			Pi = ACCAH;
+			Delay_ms(1);
+			if (Pi > Pi_prev )
+			{
+				Buck1VoltagePID.controlReference += Mma;
+				MPPT_bump_ctr += 1;
+			}
+			else
+			{
+				Mma_buff *= -1;
+				MPPT_bump_ctr -= 1;
+			}
+			Pi_prev = Pi;
+		}
+		Mma = 0;
+		MPPT_delay = 100;
+	}
+	else
+		MPPT_delay = 1;
+}
+
 void Delay_ms (unsigned int delay)
 {
 	TimerInterruptCount = 0;			 /* Clear Interrupt counter flag */
@@ -224,3 +259,5 @@ void Delay_ms (unsigned int delay)
 
 	T1CONbits.TON = 0;					 /* Disable the Timer */
 }
+
+
