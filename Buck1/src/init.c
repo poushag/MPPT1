@@ -71,7 +71,7 @@ int temp;
 #define PID_BUCK1_B Q15(-1 *(PID_BUCK1_KP + 2 * PID_BUCK1_KD))
 #define PID_BUCK1_C Q15(PID_BUCK1_KD)
 
-#define PID_BUCK1_VOLTAGE_REFERENCE 0x6D40				// Reference voltage 4V = 5D60 (or 6120 to compensate for -4% error)
+#define PID_BUCK1_VOLTAGE_REFERENCE 0x7480				// Reference voltage 4V = 5D60 (or 6120 to compensate for -4% error)
 														//                   5V = 74C0 (or 7960 to compensate for -4% error)
 														//                   3V = ? (48E0 to compensate for -4% error)
 														//                   4.8V = ? (7480 to compensate for -4% error)
@@ -128,11 +128,7 @@ void Buck1Drive(void)
 	PDC1 = 72;                            /* Initial pulse-width [ns] = minimum deadtime required (DTR1 + ALDTR1)*/            
  	TRIG1 = 8;                            /* Trigger generated at beginning of PWM active period */
 
-// 	SEVTCMP = 8;                // Special Event Trigger generated at beginning of PWM active period
-//	PTCONbits.SEVTPS = 1; 		// Special Event Trigger output postscaler set to 1:1 (trigger generated every PWM cycle
-//	PTCONbits.SEVTPS = 15; 		// Special Event Trigger output postscaler set to 1:16 (trigger generated every 16th PWM cycle
-//	PTCONbits.SEIEN = 1; 		// Special Event Trigger interrupt enabled
-
+//;agp var init
 	ctr = 0;
 	Ii_DC = 0;
 	Mma_buff = 10;		// [ns] ~10x duty res
@@ -163,8 +159,6 @@ void CurrentandVoltageMeasurements(void)
     ADSTATbits.P0RDY = 0; 				  /* Clear Pair 0 data ready bit */
     ADCPC0bits.IRQEN0 = 1; 				  /* Enable ADC Interrupt for Buck 1 control loop */ 
     ADCPC0bits.TRGSRC0 = 4; 			  /* ADC Pair 0 triggered by PWM1 */
-//    ADCPC0bits.TRGSRC0 = 5; 			  /* ADC Pair 0 triggered by SEVT */
-
 
     ADSTATbits.P2RDY = 0; 				  /* Clear Pair 2 data ready bit */
     ADCPC1bits.IRQEN2 = 0;                /* Disable ADC Interrupt for input voltage measurment */
@@ -219,7 +213,6 @@ void Buck1MPPT (void)
 	{
 		Mma = Mma_buff;
 		temp = Buck1VoltagePID.controlReference + Mma;		
-		if ((temp >= 0x48E0) || (temp <= 0x7960))									// clamp Vo
 		{
 			asm("mov 0x0864, w4");
 			asm("mov 0x085A, w5");
@@ -228,8 +221,11 @@ void Buck1MPPT (void)
 			Delay_ms(1);
 			if (Pi > Pi_prev )
 			{
-				Buck1VoltagePID.controlReference += Mma;
-				MPPT_bump_ctr += 1;
+				if ((temp >= 0x48E0) && (temp <= 0x7960))									// clamp Vo
+				{
+					Buck1VoltagePID.controlReference += Mma;
+					MPPT_bump_ctr += 1;
+				}
 			}
 			else
 			{

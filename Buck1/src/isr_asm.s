@@ -81,12 +81,12 @@ __ADCP0Interrupt:
 	mov.w w0, PDC1						; Update new Duty Cycle [ns]
     mov.w w0, TRIG1						; Update new trigger value to correspond to new duty cycle
 
+;agp begin current averaging & reflection
 	lsr w0, #1, w0						; divide w0 by two and overwrite w0
-	mov.w w0, SEVTCMP					; update special event trigger counts = 1/2 PDC1	;agp
+	mov.w w0, SEVTCMP					; update special event trigger counts = 1/2 PDC1	;agp unused
 
     mov ADCBUF0, w0					; read output curr
     mov PDC1, w4					; read on-time
-;    lsr w3, #1, w3					; & scale down by 2
     mov 0x0858, w1					; read curr accum
 	add.w w0, w1, w5				; add output curr to curr accum
 	mov 0x0856, w2					; read ctr
@@ -94,20 +94,13 @@ __ADCP0Interrupt:
     bset.b w0, #0
 	add w2, w0, w2					; increment ctr
 	sl w0, #8, w0					; set ctr limit, where 35ns is min ADC period (multiplied by ADCS value)
-;	mov PDC1, w0					; set alt ctr limit (but must also divide accum by # of samples counted this instance)
+									; (but must also divide accum by # of samples counted this instance)
 									; so for ADCS = 6, ~30 samples per switching period are taken
 	cpsgt w0, w2					; compare ctr to limit & if gtr
 	mpy w4*w5, A				; mult on-time by output curr to get InputCurrentDC			
-;	cpsgt w0, w2					; compare ctr to limit & if gtr
-;	mov ACCAH, w4				; update average value for InputCurrentDC			
-;	cpsgt w0, w2					; compare ctr to limit & if gtr
-;	mov w4, 0x085E				; update average value for InputCurrentDC			
-;	cpsgt w0, w2					; compare ctr to limit & if gtr
-;	mov ACCAL, w5				; update average value for InputCurrentDC			
 	cpsgt w0, w2					; compare ctr to limit & if gtr
 	sac.r A, #0, w3				; scale down InputCurrDC			
 	cpsgt w0, w2					; compare ctr to limit & if gtr
-;	mov w5, 0x085C				; update average value for InputCurrentDC			
 	mov w3, 0x085A				; update average value for InputCurrentDC			
 	cpsgt w0, w2					; compare ctr to limit & if gtr
 	clr.w, w5						; reset curr accum
@@ -115,6 +108,7 @@ __ADCP0Interrupt:
 	cpsgt w0, w2					; compare ctr to limit & if gtr
 	clr.w, w2						; reset ctr
 	mov.w w2, 0x0856				; save ctr
+; agp end
 
     bclr	ADSTAT,	#0					; Clear Pair 0 conversion status bit
 	bclr 	IFS6, #14					; Clear Pair 0 Interrupt Flag

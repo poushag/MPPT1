@@ -10,31 +10,31 @@ BART_0::2.0	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Volta
 BLCK_0::0.42	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	74;"	d	line:74
 BLCK_1::-0.50	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	75;"	d	line:75
 BLCK_2::0.08	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	76;"	d	line:76
-BUCK1_SOFTSTART_INCREMENT::((PID_BUCK1_VOLTAGE_REFERENCE-	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	85;"	d	line:85	file:
+BUCK1_SOFTSTART_INCREMENT::((PID_BUCK1_VOLTAGE_REFERENCE-	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	87;"	d	line:87	file:
 BartlettInit	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	438;"	p	line:438	signature:( int numElems, fractional* window )
 BitReverseComplex	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1240;"	p	line:1240	signature:( int log2N, fractcomplex* srcCV )
 BitReverseReal32bIP	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1377;"	p	line:1377	signature:( int N, long *ipBuff )
 BlackmanInit	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	449;"	p	line:449	signature:( int numElems, fractional* window )
 Buck1Drive	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\Functions.h	2;"	p	line:2	signature:(void)
-Buck1Drive	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	91;"	f	line:91	signature:(void)
+Buck1Drive	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	93;"	f	line:93	signature:(void)
 Buck1MPPT	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\Functions.h	6;"	p	line:6	signature:(void)
-Buck1MPPT	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	210;"	f	line:210	signature:(void)
+Buck1MPPT	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	214;"	f	line:214	signature:(void)
 Buck1SoftStartRoutine	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\Functions.h	5;"	p	line:5	signature:(void)
-Buck1SoftStartRoutine	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	195;"	f	line:195	signature:(void)
+Buck1SoftStartRoutine	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	199;"	f	line:199	signature:(void)
 Buck1VoltageABC	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	47;"	v	line:47
 Buck1VoltageHistory	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	48;"	v	line:48
 Buck1VoltageLoop	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\Functions.h	4;"	p	line:4	signature:(void)
-Buck1VoltageLoop	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	171;"	f	line:171	signature:(void)
+Buck1VoltageLoop	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	175;"	f	line:175	signature:(void)
 Buck1VoltagePID	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	42;"	v	line:42
 COEFFS_IN_DATA::0xFF00	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	78;"	d	line:78
 CosFactorInit	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1469;"	p	line:1469	signature:( int log2N, fractcomplex* cosFactors )
 CurrentandVoltageMeasurements	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\Functions.h	3;"	p	line:3	signature:(void)
-CurrentandVoltageMeasurements	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	141;"	f	line:141	signature:(void)
+CurrentandVoltageMeasurements	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	145;"	f	line:145	signature:(void)
 DATA_TYPE::FRACTIONAL	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	50;"	d	line:50
 DCT	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1486;"	p	line:1486	signature:( int log2N, fractional* dstV, fractional* srcV, fractcomplex* cosFactors, fractcomplex* twidFactors, int factPage )
 DCTIP	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1535;"	p	line:1535	signature:( int log2N, fractional* srcV, fractcomplex* cosFactors, fractcomplex* twidFactors, int factPage )
 Delay_ms	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\Functions.h	8;"	p	line:8	signature:(unsigned int delay)
-Delay_ms	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	240;"	f	line:240	signature:(unsigned int delay)
+Delay_ms	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	248;"	f	line:248	signature:(unsigned int delay)
 FFTComplex	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1251;"	p	line:1251	signature:( int log2N, fractcomplex* dstCV, fractcomplex* srcCV, fractcomplex* twidFactors, int factPage )
 FFTComplex32bIP	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1405;"	p	line:1405	signature:( int log2N, long *ipBuff, long *tfBuff, int factPage )
 FFTComplexIP	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1283;"	p	line:1283	signature:( int log2N, fractcomplex* srcCV, fractcomplex* twidFactors, int factPage )
@@ -81,6 +81,8 @@ INPUTUNDERVOLTAGE::350	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\
 INV_SQRT2::SIN_PI_Q	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	62;"	d	line:62
 Ii_DC	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	53;"	v	line:53
 KaiserInit	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	482;"	p	line:482	signature:( int numElems, fractional* window, float betaVal )
+MPPT_bump_ctr	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	61;"	v	line:61
+MPPT_delay	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	60;"	v	line:60
 MagnitudeCplx32bIP	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1462;"	p	line:1462	signature:( int N, long *ipBuff )
 MatrixAdd	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	647;"	p	line:647	signature:( int numRows, int numCols, fractional* dstM, fractional* srcM1, fractional* srcM2 )
 MatrixInvert	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	627;"	p	line:627	signature:( int numRowsCols, float* dstM, float* srcM, float* pivotFlag, int* swappedRows, int* swappedCols )
@@ -89,18 +91,19 @@ MatrixScale	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Volta
 MatrixSubtract	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	663;"	p	line:663	signature:( int numRows, int numCols, fractional* dstM, fractional* srcM1, fractional* srcM2 )
 MatrixTranspose	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	614;"	p	line:614	signature:( int numRows, int numCols, fractional* dstM, fractional* srcM )
 Mma	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	56;"	v	line:56
+Mma_buff	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	57;"	v	line:57
 PI::3.1415926535897931159979634685	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	55;"	d	line:55
 PID	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1624;"	p	line:1624	signature:( tPID* controller )
 PIDCoeffCalc	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1610;"	p	line:1610	signature:( fractional* kCoeffs, tPID* controller )
 PIDInit	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1617;"	p	line:1617	signature:( tPID* controller )
-PID_BUCK1_A::Q15(PID_BUCK1_KP+PID_BUCK1_KI+	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	68;"	d	line:68	file:
-PID_BUCK1_B::Q15(-1*(PID_BUCK1_KP+2*PID_BUC	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	69;"	d	line:69	file:
-PID_BUCK1_C::Q15(PID_BUCK1_KD)	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	70;"	d	line:70	file:
-PID_BUCK1_KD::0	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	65;"	d	line:65	file:
-PID_BUCK1_KI::0.0016	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	64;"	d	line:64	file:
-PID_BUCK1_KP::0.23	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	63;"	d	line:63	file:
-PID_BUCK1_VOLTAGE_MIN::2304	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	82;"	d	line:82	file:
-PID_BUCK1_VOLTAGE_REFERENCE::0x6D40	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	72;"	d	line:72	file:
+PID_BUCK1_A::Q15(PID_BUCK1_KP+PID_BUCK1_KI+	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	70;"	d	line:70	file:
+PID_BUCK1_B::Q15(-1*(PID_BUCK1_KP+2*PID_BUC	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	71;"	d	line:71	file:
+PID_BUCK1_C::Q15(PID_BUCK1_KD)	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	72;"	d	line:72	file:
+PID_BUCK1_KD::0	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	67;"	d	line:67	file:
+PID_BUCK1_KI::0.0016	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	66;"	d	line:66	file:
+PID_BUCK1_KP::0.23	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	65;"	d	line:65	file:
+PID_BUCK1_VOLTAGE_MIN::2304	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	84;"	d	line:84	file:
+PID_BUCK1_VOLTAGE_REFERENCE::0x6D40	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	74;"	d	line:74	file:
 Pi	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	58;"	v	line:58
 Pi_prev	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	59;"	v	line:59
 Q15::(X)	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	124;"	d	line:124
@@ -125,7 +128,7 @@ VectorZeroPad	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Vol
 Vi	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\main.c	54;"	l	line:54
 _FOSCSEL	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\main.c	39;"	f	line:39
 _PID	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\pid.s	117;"	l	line:117
-_PIDInit	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\pid.s	205;"	l	line:205
+_PIDInit	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\pid.s	209;"	l	line:209
 _T1Interrupt	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\isr.c	38;"	f	line:38
 __ADCP0Interrupt	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\isr_asm.s	56;"	l	line:56
 __DSP_LIB__	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	34;"	d	line:34
@@ -168,5 +171,5 @@ real	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode
 realFft32bIP	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1414;"	p	line:1414	signature:( int log2N, long *ipBuff, long *tfBuff, int factPage )
 realiFft32bIP	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1453;"	p	line:1453	signature:( int log2N, long *ipBuff, long *tfBuff, int factPage )
 tPID	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1606;"	t	line:1606
-temp	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	60;"	v	line:60
+temp	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\src\init.c	62;"	v	line:62
 toneGen32b	C:\Program Files\Microchip\Buck-Boost PICtail Plus Board\Buck1 Voltage Mode with 28P Starter Board\h\dsp.h	1368;"	p	line:1368	signature:( int samp, int tone, int phase, long *tfBuff )

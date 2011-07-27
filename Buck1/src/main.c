@@ -33,8 +33,6 @@
 
 #include "p33FJ16GS502.h"
 #include "Functions.h"
-//#include "init.c"
-//tPID Buck1VoltagePID; 
 
 _FOSCSEL(FNOSC_FRC)
 _FOSC(FCKSM_CSECMD & OSCIOFNC_ON)
@@ -104,8 +102,12 @@ int main(void)
 	
 	
 					if ((Vi <= INPUTUNDERVOLTAGE) || (Vi >= INPUTOVERVOLTAGE)) /* if input voltage is less than 
-																				    				underVoltage or greater than over 
-																									voltage limit shuts down all PWM output */
+																				underVoltage or greater than over 
+																				voltage limit shuts down all PWM output */
+//;agp when this trip activiates, IOCON1 bits 8 & 9 are set to 1 (typically IOCON1 = 0x3C00)
+//;agp testing with Rl = 2.38[Ohm] and Rs = 4.30[Ohm], undervoltage occurs around Vs = 12.9V 
+//;agp overvoltage is not a problem since Vo upper limit of 5V occurs at Vs = 14.2V (well before Vi nears OV limit)
+//;agp note that Vi at t0 must be inside the UV and OV limits or soft-start will be aborted. 
 
 					{
 						IOCON1bits.OVRENH = 1;							/* Over ride the PWM1H to inactive state */		
